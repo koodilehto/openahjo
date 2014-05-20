@@ -16,7 +16,7 @@
 {% for prop in meta_properties %}
         <meta property="{{prop.name}}" content="{{prop.content}}">
 {% endfor %}
-        <title>{% block title %}{% endblock %} | Päätökset | Helsingin kaupunki</title>
+        <title>{% block title %}{% endblock %} | Päätökset | Jyväskylän kaupunki</title>
 
         {% compress css %}
         
@@ -95,7 +95,7 @@
                   <li><a href="{% url "ui.views.about" %}">Tietoa palvelusta</a></li>
               </ul>
               <ul class="nav city-link pull-right">
-                  <li><a href="#">Helsinki</a></li>
+                  <li><a href="#">Jyväskylä</a></li>
               </ul>
           </div><!--/.nav-collapse -->
            
@@ -120,22 +120,22 @@
                     <div class="sitemap-section">
                         <h4><a href="{% url "ui.views.policymaker_list" %}">Päättäjät</a></h4>
                         <ul>
-                            <li><a href="{% url "ui.views.policymaker_details" slug='kvsto' %}">Kaupunginvaltuusto</a></li>
-                            <li><a href="{% url "ui.views.policymaker_details" slug='khs' %}">Kaupunginhallitus</a></li>
+                            <li><a href="{% url "ui.views.policymaker_details" slug='kv' %}">Kaupunginvaltuusto</a></li>
+                            <li><a href="{% url "ui.views.policymaker_details" slug='kh' %}">Kaupunginhallitus</a></li>
                         </ul>
                     </div>
                     <div class="sitemap-section">
                         <h4><a href="{% url "ui.views.about" %}">Tietoa palvelusta</a></h4>
                         <ul>
                             <li><a href="{% url "ui.views.about" %}">Yleistä</a></li>
-                            <li><a href="http://dev.hel.fi/apis/openahjo/">Palvelun ohjelmointirajapinta (API)</a></li>
-                            <li><a href="https://github.com/City-of-Helsinki/openahjo/">Palvelun lähdekoodi</a></li>
+                            <li><a href="http://proto.paatokset.fi/v1/">Palvelun ohjelmointirajapinta (API)</a></li>
+                            <li><a href="https://github.com/koodilehto/klupung/">Palvelun lähdekoodi</a></li>
                         </ul>
                     </div>
                     <div class="sitemap-section">
                         <ul class="ext-links">
-                            <li><a href="http://www.hel.fi/">&gt; Helsingin kaupunki</a></li>
-                            <li><a href="http://www.hel.fi/paatoksenteko/">&gt; Helsingin kaupungin päätöksenteko</a></li>
+                            <li><a href="http://www.jkl.fi/">&gt; Jyväskylän kaupunki</a></li>
+                            <li><a href="http://www.jkl.fi/hallinto/">&gt; Jyväskylän kaupungin päätöksenteko ja hallinto</a></li>
                         </ul>
                     </div>
                 </div>
