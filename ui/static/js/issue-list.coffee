@@ -45,22 +45,15 @@ RESOLUTIONS_ICONS =
     'ELECTION': 'group'
 
 MAP_ATTRIBUTION =
-    'Map data &copy;
-     <a href="http://openstreetmap.org">OpenStreetMap</a>
-     contributors,
-     <a href="http://creativecommons.org/licenses/by-sa/2.0/">
-     CC-BY-SA</a>,
-     Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+    'Map data and cartography &copy;
+     <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>.'
 
 create_map = (container_element, map_attribution) ->
     L.map container_element,
           layers: [
-            L.tileLayer 'http://{s}.tile.cloudmade.com/{key}/' +
-                '{style}/256/{z}/{x}/{y}.png',
+            L.tileLayer 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution: map_attribution
-                maxZoom: 18
-                key: '8831a03368004097ba8ddc389ec30633'
-                style: 998]
+                maxZoom: 18]
 
 class IssueView extends Backbone.View
     make_labels: ->
