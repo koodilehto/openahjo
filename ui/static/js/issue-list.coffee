@@ -12,6 +12,7 @@ LOCATIONS_FI =
     'plan_unit': 'Kaavayksikkö'
 RESOLUTIONS_EN =
     'PASSED': 'Passed as drafted'
+    'PASSED_UNCHANGED': 'Passed as drafted'
     'PASSED_VOTED': 'Passed after a vote'
     'PASSED_REVISED': 'Passed revised by presenter'
     'PASSED_MODIFIED': 'Passed modified'
@@ -23,6 +24,7 @@ RESOLUTIONS_EN =
     'ELECTION': 'Election'
 RESOLUTIONS_FI =
     'PASSED': 'Ehdotuksen mukaan'
+    'PASSED_UNCHANGED': 'Ehdotuksen mukaan'
     'PASSED_VOTED': 'Ehdotuksen mukaan äänestyksin'
     'PASSED_REVISED': 'Esittelijän muutetun ehdotuksen mukaan'
     'PASSED_MODIFIED': 'Esittelijän ehdotuksesta poiketen'
@@ -34,6 +36,7 @@ RESOLUTIONS_FI =
     'ELECTION': 'Vaali'
 RESOLUTIONS_ICONS =
     'PASSED': 'check'
+    'PASSED_UNCHANGED': 'check'
     'PASSED_VOTED': 'hand-o-up'
     'PASSED_REVISED': 'check-circle-o'
     'PASSED_MODIFIED': 'check-circle'
