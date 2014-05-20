@@ -154,6 +154,7 @@ class @Policymaker extends Backbone.Tastypie.Model
         @meeting_list = new MeetingList null, policymaker_list: @collection
         @meeting_list.filters['policymaker'] = @get 'id'
         @meeting_list.filters['limit'] = 1000
+        @meeting_list.filters['order_by'] = '-date'
 
     get_view_url: ->
         return VIEW_URLS['policymaker-details'].replace 'ID', @get('slug')
