@@ -146,8 +146,15 @@ POLICYMAKERS =
     'Vakalk': icon: 'puzzle-piece'
     'Ytlk': icon: 'wrench'
     'Ylk': icon: 'leaf'
-    'karltk': icon: 'leaf'
+    'karltk': icon: 'road'
     'rakympltk': icon: 'leaf'
+    'kh': icon: 'legal'
+    'kv': icon: 'microphone'
+    'ptltk': icon: 'medkit'
+    'sivltk': icon: 'book'
+    'klltk': icon: 'trophy'
+    'altek': icon: 'wrench'
+    'kktmk': icon: 'building-o'
 
 class @Policymaker extends Backbone.Tastypie.Model
     initialize: ->
