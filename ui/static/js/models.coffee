@@ -162,7 +162,7 @@ class @Policymaker extends Backbone.Tastypie.Model
         abbrev = @get('abbreviation')
         if not abbrev
             return null
-        if abbrev == 'Khs'
+        if abbrev == 'Khs' or abbrev == 'kh'
             return 'government'
         else if abbrev == 'Kvsto'
             return 'council'
