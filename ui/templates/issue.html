@@ -97,7 +97,7 @@
     </div>
     <div class="content-column">
         <div class="content-column-content">
-            <header><h1><%= current.subject %></h1></header>
+            <header><a href="<%= current.permalink %>" target="_blank"><h1><%= current.subject %></h1></a></header>
             <div class="content">
                 <% _.each(current.content, function(item) { %>
                     <h2><%= item.type_str %></h2>
