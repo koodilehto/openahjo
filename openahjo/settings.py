@@ -214,6 +214,7 @@ PROJECTION_SRID = 4326
 TASTYPIE_DEFAULT_FORMATS = ['json']
 
 GEOCODER_API_URL = "http://dev.hel.fi/geocoder/"
+KLUPUNG_API_URL = "http://proto.paatokset.fi/v1"
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.

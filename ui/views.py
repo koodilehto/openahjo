@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response
 from django.conf import settings
-from ahjodoc.models import *
-from ahjodoc.api import *
-from munigeo.api import DistrictResource
 from django.templatetags.static import static
+
+import collections
+import json
+import urllib2
 
 # Cache the JSON encodings for some rarely changing data here.
 policymaker_json = None
@@ -38,51 +39,19 @@ def render_view(request, template, args={}):
 def get_policymakers(request):
     global policymaker_json
 
-    if policymaker_json:
-        return policymaker_json
-    res = PolicymakerResource()
-    pm_list = Policymaker.objects.filter(abbreviation__isnull=False)
-    bundles = []
-    for obj in pm_list:
-        bundle = res.build_bundle(obj=obj, request=request)
-        bundles.append(res.full_dehydrate(bundle, for_list=True))
-    json = res.serialize(None, bundles, "application/json")
-    policymaker_json = json
-    return json
+    if policymaker_json is None:
+        policymaker_json = json.load(urllib2.urlopen("%s/policymaker/filter/?abbreviation.isnull=false" % settings.KLUPUNG_API_URL))["objects"]
+    return json.dumps(policymaker_json)
 
 def get_categories(request):
     global category_json
 
-    if category_json:
-        return category_json
-    res = CategoryResource()
-    cat_list = Category.objects.filter(level__lte=1)
-    bundles = []
-    for obj in cat_list:
-        bundle = res.build_bundle(obj=obj, request=request)
-        bundles.append(res.full_dehydrate(bundle, for_list=True))
-    json = res.serialize(None, bundles, "application/json")
-    category_json = json
-    return json
+    if category_json is None:
+        category_json = json.load(urllib2.urlopen("%s/category/filter/?level.lte=1" % settings.KLUPUNG_API_URL))["objects"]
+    return json.dumps(category_json)
 
 def get_districts(request):
-    global district_json
-
-    if district_json:
-        return district_json
-    res = DistrictResource()
-    obj_list = District.objects.all()
-    bundles = []
-    for obj in obj_list:
-        bundle = res.build_bundle(obj=obj, request=request)
-        data = res.full_dehydrate(bundle, for_list=True)
-        del bundle.data['borders']
-        del bundle.data['municipality']
-        bundles.append(data)
-    json = res.serialize(None, bundles, "application/json")
-    district_json = json
-    return json
-
+    return '[]'
 
 def home_view(request):
     args = {'pm_list_json': get_policymakers(request)}
@@ -105,23 +74,13 @@ def issue_list_map(request):
     return issue_view(request, 'issue.html')
 
 def issue_details(request, slug, pm_slug=None, year=None, number=None):
-    issue = get_object_or_404(Issue, slug=slug)
+    issue_json_list = json.load(urllib2.urlopen("%s/issue/filter/?slug.eq=%s" % (settings.KLUPUNG_API_URL, urllib2.quote(slug))))["objects"]
+    issue_json = issue_json_list[0]
 
     args = {}
-    args['issue'] = issue
-    if pm_slug:
-        filter_args = {
-            'issue': issue,
-            'meeting__policymaker__slug': pm_slug,
-            'meeting__year': year,
-            'meeting__number': number
-        }
-        agenda_item = get_object_or_404(AgendaItem, **filter_args)
-        args['title'] = agenda_item.subject
-        summary = agenda_item.get_summary()
-    else:
-        args['title'] = issue.subject
-        summary = issue.determine_summary()
+
+    args['title'] = issue_json["subject"]
+    summary = ""
 
     if summary:
         # Get first sentences
@@ -129,20 +88,10 @@ def issue_details(request, slug, pm_slug=None, year=None, number=None):
         desc = '.'.join(s[0:3])
         args['description'] = desc + '.'
 
-    res = IssueResource()
-    bundle = res.build_bundle(obj=issue, request=request)
-    data = res.full_dehydrate(bundle, for_list=False)
-    json = res.serialize(None, data, "application/json")
-    args['issue_json'] = json
+    args['issue_json'] = json.dumps(issue_json)
 
-    res = AgendaItemResource()
-    pm_list = AgendaItem.objects.filter(issue=issue)
-    bundles = []
-    for obj in pm_list:
-        bundle = res.build_bundle(obj=obj, request=request)
-        bundles.append(res.full_dehydrate(bundle, for_list=False))
-    json = res.serialize(None, bundles, "application/json")
-    args['ai_list_json'] = json
+    ai_list_json = json.load(urllib2.urlopen("%s/agenda_item/filter/?issue__id.eq=%d" % (settings.KLUPUNG_API_URL, issue_json["id"])))["objects"]
+    args['ai_list_json'] = json.dumps(ai_list_json)
 
     return issue_view(request, 'issue.html', args)
 
@@ -154,8 +103,12 @@ def policymaker_view(request, template, args={}):
 def policymaker_list(request):
     return policymaker_view(request, 'policymaker.html')
 
+Policymaker = collections.namedtuple("Policymaker", ("name", "summary"))
+
 def policymaker_details(request, slug, year=None, number=None):
-    pm = get_object_or_404(Policymaker, slug=slug)
+    pm_json_list = json.load(urllib2.urlopen("%s/policymaker/filter/?slug.eq=%s" % (settings.KLUPUNG_API_URL, urllib2.quote(slug))))["objects"]
+    pm_json = pm_json_list[0]
+    pm = Policymaker(name=pm_json["name"], summary=pm_json["summary"])
     args = {}
     args['policymaker'] = pm
     if year:
