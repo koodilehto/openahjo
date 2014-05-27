@@ -197,7 +197,7 @@ class IssueMapView extends Backbone.View
 
         opts.parent_el.append @el
 
-        @map = create_map(@el, MAP_ATTRIBUTION).setView [60.170833, 24.9375], 12
+        @map = create_map(@el, MAP_ATTRIBUTION).setView [62.2417000, 25.7417000], 12
         @map.on 'moveend', @map_move
 
     render_one: (issue) =>
