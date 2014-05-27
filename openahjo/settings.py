@@ -195,7 +195,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 COMPRESS_ENABLED = True
 COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
+    ('text/less', '/home/paatokset/node/node_modules/less/bin/lessc {infile} {outfile}'),
     ('text/coffeescript', 'coffee --compile --stdio'),
 )
 COMPRESS_JS_FILTERS = []
