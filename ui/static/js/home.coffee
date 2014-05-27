@@ -62,7 +62,7 @@ params =
     limit: 20
     from_minutes: true
 $.getJSON API_PREFIX + 'v1/agenda_item/', params, (data) ->
-    recent_items = data.objects
+    recent_items = data.objects.filter (o) -> o.issue.slug?
     render_recent_items()
 
 _.extend latest_meetings_list.filters,
