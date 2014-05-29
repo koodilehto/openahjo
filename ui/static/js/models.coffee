@@ -161,6 +161,14 @@ POLICYMAKERS =
     'kattaus': icon: 'cutlery'
     'tyo': icon: 'user-md'
     'tilajk': icon: 'home'
+    'talousjk': icon: 'euro'
+    'pttj': icon: 'gears'
+    'ptthj': icon: 'stethoscope'
+    'ytj': icon: 'leaf'
+    'jlj': icon: 'road'
+    'hvptmk': icon: 'smile-o'
+    'vammais': icon: 'wheelchair'
+    'vanhus': icon: ''
 
 class @Policymaker extends Backbone.Tastypie.Model
     initialize: ->
