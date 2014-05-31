@@ -379,6 +379,7 @@ class IssueSearchView extends Backbone.View
 
         params = $.deparam.querystring()
         filters = {}
+        filters.order_by = '-latest_decision_date'
         if 'q' of params
             $("#text-filter").val params['q']
 
