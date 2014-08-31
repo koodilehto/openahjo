@@ -153,6 +153,7 @@ POLICYMAKERS =
     'ptltk': icon: 'medkit'
     'sivltk': icon: 'book'
     'klltk': icon: 'trophy'
+    'kulltk': icon: 'trophy'
     'altek': icon: 'wrench'
     'kktmk': icon: 'building-o'
     'tarkltk': icon: 'eye'

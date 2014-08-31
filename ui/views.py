@@ -55,8 +55,8 @@ def get_districts(request):
 
 def home_view(request):
     args = {'pm_list_json': get_policymakers(request)}
-    args['title'] = 'Helsingin kaupungin Päätökset-palvelu'
-    args['description'] = 'Löydä juuri sinua kiinnostavat Helsingin kaupungin poliittiset päätökset.'
+    args['title'] = 'Jyväskylän kaupungin Päätökset-palvelu'
+    args['description'] = 'Löydä juuri sinua kiinnostavat Jyväskylän kaupungin poliittiset päätökset.'
     return render_view(request, 'home.html', args)
 
 def issue_view(request, template, args={}):
